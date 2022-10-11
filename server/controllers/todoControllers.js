@@ -8,19 +8,33 @@ const addTodo = async (req, res) => {
 
   console.log(todo);
 
-  const myTodo =  TodoScawaithema.create({
+  const myTodo = await TodoSchema.create({
     todoItem: todo,
   });
 
   if (myTodo) {
     console.log("Add ho gaya");
+    res.status(201).json({
+      success: true,
+    });
   } else {
-    console.log("Add nh hua");
+    throw new Error("Item not added");
   }
 };
 
-const editTodo = () => {
+const editTodo = async (req, res) => {
   console.log("Edit todo Running");
+  const { oldValue, newValue } = req.body;
+  // const newValue = "Nashra";
+
+  const item = await TodoSchema.findOne({ todoItem: oldValue });
+
+  console.log(item);
+
+  const rep = await TodoSchema.replaceOne(
+    { todoItem: item.todoItem },
+    { todoItem: newValue }
+  );
 };
 const deleteTodo = () => {
   console.log("Delete todo Running");
