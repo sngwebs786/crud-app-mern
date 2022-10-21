@@ -9,9 +9,9 @@ const {
 } = require("../controllers/todoControllers");
 
 router.post("/addTodo", addTodo);
-router.post("/editTodo", editTodo);
+router.put("/editTodo", editTodo);
 router.get("/showTodos", showTodos);
 router.post("/deleteTodo", deleteTodo);
-router.post("/deleteAllTodos", deleteAllTodos);
+router.delete("/deleteAllTodos", deleteAllTodos);
 
 module.exports = router;

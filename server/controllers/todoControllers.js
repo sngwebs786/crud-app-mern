@@ -25,7 +25,6 @@ const addTodo = async (req, res) => {
 const editTodo = async (req, res) => {
   console.log("Edit todo Running");
   const { oldValue, newValue } = req.body;
-  // const newValue = "Nashra";
 
   const item = await TodoSchema.findOne({ todoItem: oldValue });
 
@@ -36,15 +35,29 @@ const editTodo = async (req, res) => {
     { todoItem: newValue }
   );
 };
-const deleteTodo = () => {
+
+const deleteTodo = async (req, res) => {
   console.log("Delete todo Running");
+  const { myValue } = req.body;
+  const item = await TodoSchema.deleteOne({ todoItem: myValue });
+
+  // console.log(item);
 };
 
-const deleteAllTodos = () => {
+const deleteAllTodos = async () => {
   console.log("Delete All todo Running");
+  const item = await TodoSchema.deleteMany();
 };
-const showTodos = () => {
+
+const showTodos = async (req, res) => {
   console.log("Show todo Running");
+  const item = await TodoSchema.find();
+  console.log(item);
+
+  res.status(201).json({
+    success: true,
+    item,
+  });
 };
 
 module.exports = { addTodo, deleteAllTodos, editTodo, showTodos, deleteTodo };

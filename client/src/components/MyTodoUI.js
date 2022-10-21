@@ -6,17 +6,16 @@ import deleteicon from "../img/delete.png";
 import cancelIcon from "../img/cancel.png";
 import editIcon from "../img/edit.png";
 import "../App.css";
-import {useEffect} from "react"
+import { useEffect } from "react";
 const MyTodo = (props) => {
-  
-var listOfTodos=[];
+  var listOfTodos = [];
   useEffect(() => {
-   listOfTodos = props.showTodos();
-  }, [])
+    props.showTodos();
+  }, []);
 
   return (
     <div className="main-div">
-      <h1>My React Todo </h1>
+      <h1>My React Todo</h1>
       <center>
         <div className="inputs-and-buttons">
           <TextField
@@ -53,7 +52,7 @@ var listOfTodos=[];
                       <img src={cancelIcon}></img>
                     </button>
                     <button
-                      onClick={() => props.editItem(index)}
+                      onClick={() => props.editItem(items,index)}
                       className="edit-btn"
                     >
                       <img src={editIcon}></img>
